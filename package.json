@@ -63,9 +63,7 @@
     "vue": "^3.0.0"
   },
   "dependencies": {
-    "pixi.js": "^7.3.2",
-    "vue-demi": "^0.14.6",
-    "vue3-pixi": "^0.8.4"
+    "vue-demi": "^0.14.6"
   },
   "peerDependencies": {
     "@vue/composition-api": "^1.0.0-rc.1",
