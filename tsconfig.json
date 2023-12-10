@@ -1,11 +1,13 @@
 {
-    "compilerOptions": {
-        "outDir": "./lib",
-        "module": "commonjs",
-        "target": "es6",
-        "declaration": true,
-        "strict": true
-    },
-    "include": ["src"],
-    "exclude": ["node_modules", "**/__tests__/*"]
+  "compilerOptions": {
+    "outDir": "./lib",
+    "module": "commonjs",
+    "target": "es6",
+    "declaration": true,
+    "strict": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "jsx": "preserve"
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "dev/viewer1.ts"],
+  "exclude": ["node_modules", "**/__tests__/*"]
 }
