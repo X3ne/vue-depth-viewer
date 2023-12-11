@@ -5,3 +5,5 @@
 ☐ add scene metrics for debug purpose
 ☐ implement more options to the vue component
 ☐ test for nuxt
+☐ add a boolean to use mouse or not
+☐ add a boolean to use mouse on the entire screen (not only on the container)
