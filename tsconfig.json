@@ -6,7 +6,10 @@
     "declaration": true,
     "strict": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "types": [
+      "vite-plugin-glsl/ext"
+    ]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "dev/viewer1.ts"],
   "exclude": ["node_modules", "**/__tests__/*"]

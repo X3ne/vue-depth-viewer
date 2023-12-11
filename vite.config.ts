@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import banner from 'vite-plugin-banner'
+import glsl from 'vite-plugin-glsl'
 import dts from 'vite-plugin-dts'
 import pkg from './package.json'
 
@@ -47,6 +48,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
     dts({ rollupTypes: true }),
+    glsl(),
     banner({
       outDir,
       content: [
