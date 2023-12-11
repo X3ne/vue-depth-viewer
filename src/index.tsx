@@ -1,6 +1,7 @@
-import { defineComponent, onMounted, ref, watch } from 'vue-demi'
+import { defineComponent, onMounted, ref, toRefs, watch } from 'vue-demi'
 import { props } from './props'
 import { Viewer } from './viewer'
+import './style.css'
 
 export default defineComponent({
   name: 'VueDepthViewer',
@@ -8,6 +9,7 @@ export default defineComponent({
   setup(props) {
     const viewerRef = ref<HTMLDivElement | null>(null)
     let viewer: Viewer | null = null
+    const propsRefs = toRefs(props)
 
     onMounted(() => {
       viewer = new Viewer(viewerRef, {
@@ -18,8 +20,20 @@ export default defineComponent({
       })
     })
 
+    watch(() => props.options, (newOptions) => {
+      if (viewer) {
+        viewer.rerender({
+          image: propsRefs.img.value,
+          depthImage: propsRefs.depthImg.value,
+          horizontalThreshold: newOptions.horizontalThreshold,
+          verticalThreshold: newOptions.verticalThreshold,
+        })
+      }
+    }, { deep: true })
+
     return () => (
-      <div ref={viewerRef}>
+      <div ref={viewerRef} class="vuedepthviewer__container">
+        <img src={props.img} class="vuedepthviewer__img" />
       </div>
     )
   }
