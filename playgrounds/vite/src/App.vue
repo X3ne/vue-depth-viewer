@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import VueDepthViewer from "depthviewer"
-import image from "./assets/image6.jpg"
-import depth from "./assets/depth6.png"
+import image from "./assets/image.png"
+import depth from "./assets/depth.png"
 </script>
 
 <template>
@@ -15,7 +15,7 @@ import depth from "./assets/depth6.png"
         :img="image"
         :depth-img="depth"
         :options="{
-          horizontalThreshold: 30,
+          horizontalThreshold: 100,
           verticalThreshold: 150,
         }"
         class="viewer"
