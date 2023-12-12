@@ -17,15 +17,5 @@ export default defineConfig(({ command }) => ({
     },
   build: {
     minify: false,
-    rollupOptions: {
-      output: {
-        manualChunks: (id) => {
-          if (id.includes('@vueuse/'))
-            return 'vueuse'
-          else
-            return 'vendor'
-        },
-      },
-    },
   },
 }))
