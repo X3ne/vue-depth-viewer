@@ -1,11 +1,11 @@
 .vuedepthviewer__container {
-  width: 100%;
+  width: fit-content;
   height: auto;
   position: relative;
   overflow: hidden;
 }
 
 .vuedepthviewer__img {
+  height: 100%;
   width: 100%;
-  height: auto;
 }

@@ -3,10 +3,11 @@ import fragmentShaderSource from './shaders/fragment.glsl?raw'
 import vertexShaderSource from './shaders/vertex.glsl?raw'
 
 export interface ViewerOptions {
-  image: string;
-  depthImage: string;
-  verticalThreshold?: number;
-  horizontalThreshold?: number;
+  image: string
+  depthImage: string
+  verticalThreshold?: number
+  horizontalThreshold?: number
+  crop?: boolean
 }
 
 class Uniform {
@@ -69,11 +70,13 @@ export class Viewer {
   private imageAspect = 1
   private verticalThreshold: number
   private horizontalThreshold: number
+  private crop: boolean
 
   private uResolution: Uniform | null = null
   private uRatio: Uniform | null = null
   private uThreshold: Uniform | null = null
   private uMouse: Uniform | null = null
+  private uCrop: Uniform | null = null
 
   private billboard: Rect | null = null
   private positionLocation: number | null = null
@@ -99,6 +102,7 @@ export class Viewer {
     this.canvas.style.top = '0'
     this.canvas.style.left = '0'
     this.canvas.style.zIndex = '10'
+    this.canvas.style.opacity = '1'
     this.container.appendChild(this.canvas)
 
     const gl = this.canvas.getContext('webgl')
@@ -121,6 +125,7 @@ export class Viewer {
     this.depthImage = options.depthImage
     this.verticalThreshold = options.verticalThreshold || 0.1
     this.horizontalThreshold = options.horizontalThreshold || 0.1
+    this.crop = options.crop || false
 
     this.resizeHandler = this.resizeHandler.bind(this)
     this.render = this.render.bind(this)
@@ -163,17 +168,28 @@ export class Viewer {
     this.canvas.style.height = `${this.height}px`
 
     let a1, a2
-    if (this.height / this.width < this.imageAspect) {
-      a1 = 1
-      a2 = (this.height / this.width) / this.imageAspect
+    if (this.crop === false) {
+      if (this.height / this.width < this.imageAspect) {
+        a1 = (this.width / this.height) * this.imageAspect
+        a2 = 1
+      } else {
+        a1 = 1
+        a2 = (this.height / this.width) / this.imageAspect
+      }
     } else {
-      a1 = (this.width / this.height) * this.imageAspect
-      a2 = 1
+      if (this.height / this.width < this.imageAspect) {
+        a1 = 1
+        a2 = (this.height / this.width) / this.imageAspect
+      } else {
+        a1 = (this.width / this.height) * this.imageAspect
+        a2 = 1
+      }
     }
 
     this.uResolution?.set(this.width, this.height, a1, a2)
     this.uRatio?.set(1 / this.ratio)
     this.uThreshold?.set(this.horizontalThreshold, this.verticalThreshold)
+    this.uCrop?.set(this.crop ? 1 : 0)
 
     this.gl.viewport(0, 0, this.width * this.ratio, this.height * this.ratio)
   }
@@ -194,6 +210,7 @@ export class Viewer {
     this.uMouse = new Uniform('mouse', '2f', this.program, this.gl)
     this.uRatio = new Uniform('pixelRatio', '1f', this.program, this.gl)
     this.uThreshold = new Uniform('threshold', '2f', this.program, this.gl)
+    this.uCrop = new Uniform('crop', '1i', this.program, this.gl)
 
     this.billboard = new Rect(this.gl)
     this.positionLocation = this.gl.getAttribLocation(
@@ -322,6 +339,7 @@ export class Viewer {
     this.depthImage = options.depthImage
     this.verticalThreshold = options.verticalThreshold || 0.1
     this.horizontalThreshold = options.horizontalThreshold || 0.1
+    this.crop = options.crop || false
 
     this.textures = []
     this.addTexture()
