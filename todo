@@ -1,7 +1,7 @@
 ✔ make the scene responsive to the container @done(23-12-10 20:50)
 ☐ rerender the scene when the image or the depthmap is changed
 ☐ clean some code
-☐ add a boolean to prevent image from being cropped
+✔ add a boolean to prevent image from being cropped @done(23-12-12 16:33)
 ☐ add scene metrics for debug purpose
 ☐ implement more options to the vue component
 ☐ test for nuxt
