@@ -18,10 +18,13 @@ export interface DepthViewerProps {
 
 export default defineComponent<DepthViewerProps>({
   name: 'VueDepthViewer',
-  props: ['options'] as unknown as undefined,
+  props: ['img', 'depthImg', 'options'] as unknown as undefined,
   setup(props) {
     const viewerRef = ref<HTMLDivElement | null>(null)
     let viewer: Viewer | null = null
+
+    console.log(props)
+
 
     onMounted(() => {
       viewer = new Viewer(viewerRef, {
