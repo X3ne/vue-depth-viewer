@@ -1,5 +1,5 @@
 ✔ make the scene responsive to the container @done(23-12-10 20:50)
-☐ rerender the scene when the image or the depthmap is changed
+✔ rerender the scene when the image or the depthmap is changed @done(23-12-18 12:20)
 ☐ clean some code
 ✔ add a boolean to prevent image from being cropped @done(23-12-12 16:33)
 ☐ add scene metrics for debug purpose
@@ -7,3 +7,4 @@
 ☐ test for nuxt
 ☐ add a boolean to use mouse or not
 ☐ add a boolean to use mouse on the entire screen (not only on the container)
+☐ add a boolean to use gyro
