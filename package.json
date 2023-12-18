@@ -1,9 +1,13 @@
 {
   "name": "vue-depth-viewer",
   "version": "0.1.0",
-  "description": "",
+  "description": "Vue component to create a 3d effect on images with a depthmap using WebGL",
   "author": "X3ne",
-  "homepage": "",
+  "homepage": "https://github.com/X3ne/vue-depth-viewer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/X3ne/vue-depth-viewer"
+  },
   "license": "MIT",
   "keywords": [
     "typescript",
