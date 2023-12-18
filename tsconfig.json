@@ -11,6 +11,6 @@
       "vite-plugin-glsl/ext"
     ]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "dev/viewer1.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }
