@@ -12,7 +12,7 @@ export default defineConfig(({ command }) => ({
     ? {}
     : {
       alias: {
-        'depthviewer': resolve(__dirname, '../../src/index.tsx'),
+        'vue-depth-viewer': resolve(__dirname, '../../src/index.tsx'),
       },
     },
   build: {

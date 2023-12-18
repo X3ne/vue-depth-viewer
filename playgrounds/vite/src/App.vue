@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import VueDepthViewer from "depthviewer"
+import VueDepthViewer from "vue-depth-viewer"
 import image from "./assets/image.png"
 import depth from "./assets/depth.png"
 import { ref } from "vue"
