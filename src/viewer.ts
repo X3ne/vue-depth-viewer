@@ -24,15 +24,16 @@ class Uniform {
     this.location = gl.getUniformLocation(program, name)
   }
 
-  public set(...values: any[]): void {
+  public set(...values: unknown[]): void {
     if (this.location !== null) {
       const method = `uniform${this.suffix}` as keyof WebGLRenderingContext
       const uniformMethod = this.gl[method] as (
         location: WebGLUniformLocation,
-        ...values: any[]
+        ...values: unknown[]
       ) => void
       uniformMethod.apply(this.gl, [this.location, ...values])
     } else {
+      // eslint-disable-next-line no-console
       console.warn(`Uniform "${this.name}" not found`)
     }
   }
@@ -53,6 +54,7 @@ class Rect {
     if (this.buffer !== null) {
       this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4)
     } else {
+      // eslint-disable-next-line no-console
       console.warn('Rect buffer not found')
     }
   }
@@ -154,6 +156,7 @@ export class Viewer {
     this.gl.shaderSource(shader, src)
     this.gl.compileShader(shader)
     if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
+      // eslint-disable-next-line no-console
       console.error(this.gl.getShaderInfoLog(shader))
       throw new Error('Shader compile error')
     }
@@ -353,8 +356,6 @@ export class Viewer {
   }
 
   public rerender(options: ViewerOptions) {
-    console.log('rerender', options)
-
     this.image = options.image
     this.depthImage = options.depthImage
     this.verticalThreshold = options.verticalThreshold ?? 0.1

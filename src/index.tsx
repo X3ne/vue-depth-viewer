@@ -1,4 +1,4 @@
-import { defineComponent, onBeforeUnmount, onMounted, ref, toRefs, watch } from 'vue-demi'
+import { defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue-demi'
 import { props } from './props'
 import { Viewer } from './viewer'
 import './style.css'
@@ -11,8 +11,6 @@ export default defineComponent({
     let viewer: Viewer | null = null
 
     onMounted(() => {
-      console.log(props)
-
       viewer = new Viewer(viewerRef, {
         image: props.img,
         depthImage: props.depthImg,
@@ -31,8 +29,6 @@ export default defineComponent({
     })
 
     watch(() => props, (newProps) => {
-      console.log(props)
-
       if (viewer) {
         viewer.rerender({
           image: newProps.img,
