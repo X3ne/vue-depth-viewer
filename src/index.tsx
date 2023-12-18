@@ -9,26 +9,39 @@ export default defineComponent({
   setup(props) {
     const viewerRef = ref<HTMLDivElement | null>(null)
     let viewer: Viewer | null = null
-    const propsRefs = toRefs(props)
 
     onMounted(() => {
+      console.log(props)
+
       viewer = new Viewer(viewerRef, {
         image: props.img,
         depthImage: props.depthImg,
         horizontalThreshold: props.options.horizontalThreshold,
         verticalThreshold: props.options.verticalThreshold,
         crop: props.options.crop,
+        useMouse: props.options.useMouse,
+        useScreen: props.options.useScreen,
       })
     })
 
-    watch(() => props.options, (newOptions) => {
+    onBeforeUnmount(() => {
+      if (viewer) {
+        viewer.destroy()
+      }
+    })
+
+    watch(() => props, (newProps) => {
+      console.log(props)
+
       if (viewer) {
         viewer.rerender({
-          image: propsRefs.img.value,
-          depthImage: propsRefs.depthImg.value,
-          horizontalThreshold: newOptions.horizontalThreshold,
-          verticalThreshold: newOptions.verticalThreshold,
-          crop: newOptions.crop,
+          image: newProps.img,
+          depthImage: newProps.depthImg,
+          horizontalThreshold: newProps.options.horizontalThreshold,
+          verticalThreshold: newProps.options.verticalThreshold,
+          crop: newProps.options.crop,
+          useMouse: props.options.useMouse,
+          useScreen: props.options.useScreen,
         })
       }
     }, { deep: true })

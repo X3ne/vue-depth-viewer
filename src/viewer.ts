@@ -3,11 +3,13 @@ import fragmentShaderSource from './shaders/fragment.glsl?raw'
 import vertexShaderSource from './shaders/vertex.glsl?raw'
 
 export interface ViewerOptions {
-  image: string
-  depthImage: string
-  verticalThreshold?: number
-  horizontalThreshold?: number
-  crop?: boolean
+  image: string;
+  depthImage: string;
+  verticalThreshold?: number;
+  horizontalThreshold?: number;
+  crop?: boolean;
+  useMouse?: boolean;
+  useScreen?: boolean;
 }
 
 class Uniform {
@@ -71,6 +73,8 @@ export class Viewer {
   private verticalThreshold: number
   private horizontalThreshold: number
   private crop: boolean
+  private useMouse: boolean
+  private useScreen: boolean
 
   private uResolution: Uniform | null = null
   private uRatio: Uniform | null = null
@@ -123,9 +127,11 @@ export class Viewer {
 
     this.image = options.image
     this.depthImage = options.depthImage
-    this.verticalThreshold = options.verticalThreshold || 0.1
-    this.horizontalThreshold = options.horizontalThreshold || 0.1
-    this.crop = options.crop || false
+    this.verticalThreshold = options.verticalThreshold ?? 0.1
+    this.horizontalThreshold = options.horizontalThreshold ?? 0.1
+    this.crop = options.crop ?? false
+    this.useMouse = options.useMouse ?? true
+    this.useScreen = options.useScreen ?? false
 
     this.resizeHandler = this.resizeHandler.bind(this)
     this.render = this.render.bind(this)
@@ -134,13 +140,9 @@ export class Viewer {
     this.resizeHandler()
     this.addTexture()
 
-    this.canvas.addEventListener('mousemove', (e) => {
-      const halfX = this.width / 2
-      const halfY = this.height / 2
-
-      this.mouseTargetX = (halfX - e.clientX) / halfX
-      this.mouseTargetY = (halfY - e.clientY) / halfY
-    })
+    if (this.useMouse) {
+      this.useMouseFn()
+    }
   }
 
   private addShader(src: string, type: number) {
@@ -174,12 +176,12 @@ export class Viewer {
         a2 = 1
       } else {
         a1 = 1
-        a2 = (this.height / this.width) / this.imageAspect
+        a2 = this.height / this.width / this.imageAspect
       }
     } else {
       if (this.height / this.width < this.imageAspect) {
         a1 = 1
-        a2 = (this.height / this.width) / this.imageAspect
+        a2 = this.height / this.width / this.imageAspect
       } else {
         a1 = (this.width / this.height) * this.imageAspect
         a2 = 1
@@ -237,7 +239,10 @@ export class Viewer {
     return image
   }
 
-  private loadImages(images: string[], callback: (images: HTMLImageElement[]) => void) {
+  private loadImages(
+    images: string[],
+    callback: (images: HTMLImageElement[]) => void
+  ) {
     let loaded = 0
     const total = images.length
     const imgs: HTMLImageElement[] = []
@@ -301,14 +306,8 @@ export class Viewer {
       this.textures.push(texture)
     }
 
-    const u_image0Location = this.gl.getUniformLocation(
-      this.program,
-      'image0'
-    )
-    const u_image1Location = this.gl.getUniformLocation(
-      this.program,
-      'image1'
-    )
+    const u_image0Location = this.gl.getUniformLocation(this.program, 'image0')
+    const u_image1Location = this.gl.getUniformLocation(this.program, 'image1')
 
     this.gl.uniform1i(u_image0Location, 0)
     this.gl.uniform1i(u_image1Location, 1)
@@ -323,8 +322,8 @@ export class Viewer {
   }
 
   private render() {
-    this.mouseX += (this.mouseTargetX - this.mouseX)
-    this.mouseY += (this.mouseTargetY - this.mouseY)
+    this.mouseX += this.mouseTargetX - this.mouseX
+    this.mouseY += this.mouseTargetY - this.mouseY
 
     this.uMouse?.set(this.mouseX, this.mouseY)
 
@@ -332,14 +331,37 @@ export class Viewer {
     requestAnimationFrame(this.render)
   }
 
+  private useMouseFn() {
+    if (this.useScreen) {
+      window.addEventListener('mousemove', (e) => {
+        const halfX = this.width / 2
+        const halfY = this.height / 2
+
+        this.mouseTargetX = (halfX - e.clientX) / halfX
+        this.mouseTargetY = (halfY - e.clientY) / halfY
+      })
+      return
+    }
+
+    this.canvas.addEventListener('mousemove', (e) => {
+      const halfX = this.width / 2
+      const halfY = this.height / 2
+
+      this.mouseTargetX = (halfX - e.clientX) / halfX
+      this.mouseTargetY = (halfY - e.clientY) / halfY
+    })
+  }
+
   public rerender(options: ViewerOptions) {
     console.log('rerender', options)
 
     this.image = options.image
     this.depthImage = options.depthImage
-    this.verticalThreshold = options.verticalThreshold || 0.1
-    this.horizontalThreshold = options.horizontalThreshold || 0.1
-    this.crop = options.crop || false
+    this.verticalThreshold = options.verticalThreshold ?? 0.1
+    this.horizontalThreshold = options.horizontalThreshold ?? 0.1
+    this.crop = options.crop ?? false
+    this.useMouse = options.useMouse ?? false
+    this.useScreen = options.useScreen ?? false
 
     this.textures = []
     this.addTexture()
