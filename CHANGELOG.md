@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/X3ne/vue-depth-viewer/compare/v1.0.2...v1.1.0) (2024-01-23)
+
+
+### Features
+
+* remove integrated style and moved to external css file ([cd8857f](https://github.com/X3ne/vue-depth-viewer/commit/cd8857fc9adcbc3f1f07616c8abe95c1a51a2823))
+
 ## [1.0.2](https://github.com/X3ne/vue-depth-viewer/compare/v1.0.1...v1.0.2) (2024-01-23)
 
 
