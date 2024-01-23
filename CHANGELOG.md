@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/X3ne/vue-depth-viewer/compare/v1.0.1...v1.0.2) (2024-01-23)
+
+
+### Bug Fixes
+
+* github publish action and update readme ([7b112fc](https://github.com/X3ne/vue-depth-viewer/commit/7b112fc34fdfd792b6a2f06307d9098517feb77d))
+
 ## [1.0.1](https://github.com/X3ne/vue-depth-viewer/compare/v1.0.0...v1.0.1) (2024-01-23)
 
 
