@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/X3ne/vue-depth-viewer/compare/v1.0.0...v1.0.1) (2024-01-23)
+
+
+### Bug Fixes
+
+* **viewer:** add relative position to the container ([bf3191c](https://github.com/X3ne/vue-depth-viewer/commit/bf3191c170ec78eaf4f834bc124fe32e3fb1b59b))
+
 ## 1.0.0 (2023-12-18)
 
 
