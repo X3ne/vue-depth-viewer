@@ -12,7 +12,9 @@ Simulate a fake 3d view with depth map and WebGl for your vue apps.
 
 ## Installation
 
-Work in progress, I'll release an npm package when all the features I want are implemented. (see [todo](todo))
+```
+npm i vue-depth-viewer
+```
 
 ## Usage
 
