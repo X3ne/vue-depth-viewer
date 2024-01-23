@@ -29,6 +29,10 @@
       "import": "./lib/index.mjs",
       "require": "./lib/index.cjs",
       "types": "./lib/index.d.ts"
+    },
+    "./style.css": {
+      "import": "./lib/style.css",
+      "require": "./lib/style.css"
     }
   },
   "scripts": {

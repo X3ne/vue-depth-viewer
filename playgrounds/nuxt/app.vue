@@ -3,6 +3,7 @@ import VueDepthViewer from "vue-depth-viewer"
 import image from "./assets/image.png"
 import depth from "./assets/depth.png"
 import { ref } from "vue"
+import "../../../lib/style.css"
 
 const crop = ref(false)
 

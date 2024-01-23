@@ -1,6 +1,5 @@
 import { defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue-demi'
 import { Viewer } from './viewer'
-import './style.css'
 
 export interface DepthViewerOptions {
   horizontalThreshold?: number

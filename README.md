@@ -19,6 +19,8 @@ npm i vue-depth-viewer
 ## Usage
 
 ```vue
+import "vue-depth-viewer/style.css"
+
 <VueDepthViewer
   :img="image"
   :depth-img="depth"
@@ -29,6 +31,14 @@ npm i vue-depth-viewer
 />
 ```
 
+## Custom css
+
+You can add you custom css via the following properties
+
+- `.vuedepthviewer__container` for the container
+
+- `.vuedepthviewer__img` for the placeholder image
+
 ## Playground
 
-To use the playground just go to the `./playground/vite` and run `npm i` and `npm run dev`.
+To use the playground just go to the `./playground/vite` or `./playground/nuxt` and run `npm i` and `npm run dev`.
