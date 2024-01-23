@@ -23,9 +23,6 @@ export default defineComponent<DepthViewerProps>({
     const viewerRef = ref<HTMLDivElement | null>(null)
     let viewer: Viewer | null = null
 
-    console.log(props)
-
-
     onMounted(() => {
       viewer = new Viewer(viewerRef, {
         image: props.img,
