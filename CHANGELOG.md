@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/X3ne/vue-depth-viewer/compare/v1.1.0...v1.2.0) (2024-01-24)
+
+
+### Features
+
+* add css file to bundle ([0288290](https://github.com/X3ne/vue-depth-viewer/commit/02882902ea86291978000e65410f72888161bda8))
+
 ## [1.1.0](https://github.com/X3ne/vue-depth-viewer/compare/v1.0.2...v1.1.0) (2024-01-23)
 
 
